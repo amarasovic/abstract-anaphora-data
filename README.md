@@ -12,15 +12,16 @@ Scripts for processing data for resolution of abstract anaphora
 4. import parsed corpus and choose "General Penn treebank format filter"
 5. click start
 
-Find matches
+### Find matches for a syntactic pattern
 1. run: ./runTSearch.sh 
 2. click on the corpus in the left sidebar
 3. write match in the big white space and click search
 4. from the toolbar choose: Query > Export Matches to File > Export to file and Submit 
 
 
-Queries
-q1. the full corpus: [word=/.*/];
+### Used Queries
+q1. the full corpus
+	[word=/.*/];
 
 q2. for the general VP-SBAR-S pattern without any constraints: 
 	& #vp: [cat="VP"] 
