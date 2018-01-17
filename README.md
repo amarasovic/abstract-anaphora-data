@@ -45,7 +45,7 @@ Scripts for processing data for resolution of abstract anaphora
 	& #sbar > #s
 	& #sbar > #wh;
 
-Examples: 
+**Examples of unwanted instances**: 
 
 * WHNP: That selling of futures contract by elevators [is [what [helps keep downward pressure on crop prices during the harves]_S]_SBAR]_VP.
 * WHADJP: But some analysts [wonder [how [strong the recovery will be]_S]_SBAR]_VP.
