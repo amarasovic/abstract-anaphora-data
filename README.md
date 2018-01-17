@@ -3,6 +3,15 @@ Scripts for processing data for resolution of abstract anaphora
 
 ## Generate training data
 
+Follow instructions how to generate training data as in: Ana Marasović, Leo Born, Juri Opitz, and Anette Frank (2017): A Mention-Ranking Model for Abstract Anaphora Resolution. In Proceedings of the 2017 Conference on Empirical Methods in Natural Language Processing (EMNLP). Copenhagen, Denmark. If you make use of the contents of this repository, please cite the following paper:
+
+	@inproceedings{marasovic2017aar,
+	  title={{A Mention-Ranking Model for Abstract Anaphora Resolution}},
+	  author={Marasovi\'{c}, Ana and Born, Leo and Opitz, Juri and Frank, Anette},
+	  booktitle={Proceedings of the 2017 Conference on Empirical Methods in Natural Language Processing (EMNLP)},
+	  year={2017}
+	}
+
 1. download [TigerSearch](http://www.ims.uni-stuttgart.de/forschung/ressourcen/werkzeuge/tigersearch.html)
 
 ### Insert a parsed corpus in TigerSeach 
