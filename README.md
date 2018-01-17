@@ -5,7 +5,7 @@ Scripts for processing data for resolution of abstract anaphora
 
 1. download TigerSearch from http://www.ims.uni-stuttgart.de/forschung/ressourcen/werkzeuge/tigersearch.html
 
-Insert a parsed corpus in TigerSeach 
+### Insert a parsed corpus in TigerSeach 
 1. run: ./runTRegistry.sh
 2. click on CorporaDir from the left sidebar
 3. from toolbar choose: Corpus > Insert Corpus
