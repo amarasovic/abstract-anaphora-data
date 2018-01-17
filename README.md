@@ -3,7 +3,7 @@ Scripts for processing data for resolution of abstract anaphora
 
 ## Generate training data
 
-Follow instructions how to generate training data as in: Ana Marasović, Leo Born, Juri Opitz, and Anette Frank (2017): A Mention-Ranking Model for Abstract Anaphora Resolution. In Proceedings of the 2017 Conference on Empirical Methods in Natural Language Processing (EMNLP). Copenhagen, Denmark. If you make use of the contents of this repository, please cite the following paper:
+Follow instructions how to generate training data as in: Ana Marasović, Leo Born, Juri Opitz, and Anette Frank (2017): [A Mention-Ranking Model for Abstract Anaphora Resolution](http://aclweb.org/anthology/D/D17/D17-1021.pdf). In Proceedings of the 2017 Conference on Empirical Methods in Natural Language Processing (EMNLP). Copenhagen, Denmark. If you make use of the contents of this repository, please cite the following paper:
 
 	@inproceedings{marasovic2017aar,
 	  title={{A Mention-Ranking Model for Abstract Anaphora Resolution}},
