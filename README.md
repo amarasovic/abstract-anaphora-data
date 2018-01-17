@@ -25,17 +25,15 @@ If you make use of the contents of this repository, please cite the following pa
 
 1. download [TigerSearch](http://www.ims.uni-stuttgart.de/forschung/ressourcen/werkzeuge/tigersearch.html)
 
-### Insert a parsed corpus in TigerSeach 
-1. run:
-	./runTRegistry.sh
+### Insert a parsed corpus in TigerSearch 
+1. run: ```./runTRegistry.sh```
 2. click on CorporaDir in the left sidebar
 3. from the toolbar choose: Corpus > Insert Corpus
 4. import parsed corpus and choose "General Penn treebank format filter"
 5. click Start
 
 ### Find matches for a syntactic pattern
-1. run
-	./runTSearch.sh 
+1. run: ```./runTSearch.sh```
 2. click on the corpus in the left sidebar
 3. write a query in the big white space and click Search
 4. from the toolbar choose: Query > Export Matches to File > Export to file and Submit 
