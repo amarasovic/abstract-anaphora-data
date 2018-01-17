@@ -21,9 +21,11 @@ Scripts for processing data for resolution of abstract anaphora
 
 ### Used Queries
 q1. the full corpus
+
 	[word=/.*/];
 
 q2. for the general VP-SBAR-S pattern without any constraints: 
+
 	& #vp: [cat="VP"] 
 	& #sbar: [cat="SBAR"]
 	& #s: [cat="S"]
@@ -31,6 +33,7 @@ q2. for the general VP-SBAR-S pattern without any constraints:
 	& #sbar > #s;
 
 q3. for the VP-SBAR-S pattern WITH wh-adverb (WHADV), wh-noun (WHNP) or wh-propositional (WHPP) subordinate clause (SBAR):
+
 	#vp & #sbar & #s 
 	& #vp: [cat="VP"] 
 	& #sbar: [cat="SBAR"]
