@@ -3,24 +3,26 @@ Scripts for processing data for resolution of abstract anaphora
 
 ## Generate training data
 
-1. download TigerSearch from http://www.ims.uni-stuttgart.de/forschung/ressourcen/werkzeuge/tigersearch.html
+1. download [TigerSearch](http://www.ims.uni-stuttgart.de/forschung/ressourcen/werkzeuge/tigersearch.html)
 
 ### Insert a parsed corpus in TigerSeach 
-1. run: ./runTRegistry.sh
-2. click on CorporaDir from the left sidebar
-3. from toolbar choose: Corpus > Insert Corpus
+1. run:
+	./runTRegistry.sh
+2. click on CorporaDir in the left sidebar
+3. from the toolbar choose: Corpus > Insert Corpus
 4. import parsed corpus and choose "General Penn treebank format filter"
-5. click start
+5. click Start
 
 ### Find matches for a syntactic pattern
-1. run: ./runTSearch.sh 
+1. run
+	./runTSearch.sh 
 2. click on the corpus in the left sidebar
-3. write match in the big white space and click search
+3. write a query in the big white space and click Search
 4. from the toolbar choose: Query > Export Matches to File > Export to file and Submit 
 
 
 ### Used Queries
-(q1) the full corpus
+(q1) to get the full corpus:
 
 	[word=/.*/];
 
@@ -43,12 +45,15 @@ Scripts for processing data for resolution of abstract anaphora
 	& #sbar > #s
 	& #sbar > #wh;
 
-	WHNP: That selling of futures contract by elevators [is [what [helps keep downward pressure on crop prices during the harves]_S]_SBAR]_VP.
-	WHADJP: But some analysts [wonder [how [strong the recovery will be]_S]_SBAR]_VP.
-	WHADVP: Predictions for limited dollar losses are based largely on the pound's weak state after Mr. Lawson's resignation and the yen's inability to [strengthen substantially [when [there are dollar retreats]_S]_SBAR]_VP.
-	WHPP: He said, while dialogue is important, enough forums already [exist [in which [different intrests can express themselve]_S]_SBAR]_VP.
+Examples: 
+
+* WHNP: That selling of futures contract by elevators [is [what [helps keep downward pressure on crop prices during the harves]_S]_SBAR]_VP.
+* WHADJP: But some analysts [wonder [how [strong the recovery will be]_S]_SBAR]_VP.
+* WHADVP: Predictions for limited dollar losses are based largely on the pound's weak state after Mr. Lawson's resignation and the yen's inability to [strengthen substantially [when [there are dollar retreats]_S]_SBAR]_VP.
+* WHPP: He said, while dialogue is important, enough forums already [exist [in which [different intrests can express themselve]_S]_SBAR]_VP.
 
 (q4) for the VP-SBAR-S pattern WITH "that" as the head of the SBAR clause we require that the SBAR has exactly 2 children; others are captured:
+	
 	#vp & #sbar & #s 
 	& #vp: [cat="VP"] 
 	& #sbar: [cat="SBAR"]
