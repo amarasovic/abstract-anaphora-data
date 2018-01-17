@@ -22,11 +22,11 @@ Scripts for processing data for resolution of abstract anaphora
 
 
 ### Used Queries
-(q1) to get the full corpus:
+**(q1)** to get the full corpus:
 
 	[word=/.*/];
 
-(q2) for the general VP-SBAR-S pattern without any constraints: 
+**(q2)** for the general VP-SBAR-S pattern without any constraints: 
 
 	& #vp: [cat="VP"] 
 	& #sbar: [cat="SBAR"]
@@ -34,7 +34,7 @@ Scripts for processing data for resolution of abstract anaphora
 	& #vp > #sbar
 	& #sbar > #s;
 
-(q3) for the VP-SBAR-S pattern _with_ wh-adverb (WHADV), wh-noun (WHNP) or wh-propositional (WHPP) subordinate clause (SBAR):
+**(q3)** for the VP-SBAR-S pattern _with_ wh-adverb (WHADV), wh-noun (WHNP) or wh-propositional (WHPP) subordinate clause (SBAR):
 
 	#vp & #sbar & #s 
 	& #vp: [cat="VP"] 
@@ -52,7 +52,7 @@ Scripts for processing data for resolution of abstract anaphora
 * WHADVP: Predictions for limited dollar losses are based largely on the pound's weak state after Mr. Lawson's resignation and the yen's inability to [strengthen substantially [when [there are dollar retreats]_S]_SBAR]_VP.
 * WHPP: He said, while dialogue is important, enough forums already [exist [in which [different intrests can express themselve]_S]_SBAR]_VP.
 
-(q4) for the VP-SBAR-S pattern WITH "that" as the head of the SBAR clause we require that the SBAR has exactly 2 children; others are captured with:
+**(q4)** for the VP-SBAR-S pattern WITH "that" as the head of the SBAR clause we require that the SBAR has exactly 2 children; others are captured with:
 	
 	#vp & #sbar & #s 
 	& #vp: [cat="VP"] 
@@ -66,7 +66,7 @@ Scripts for processing data for resolution of abstract anaphora
 
 The FDA already requires drug manufactures to [include [warnings *ICH*]_NP [with [insulin products]_NP]_PP [that [symptoms of hypoglycemia are less pronounced with human insulin than with animal-based products]_S]_SBAR. 
 
-(q5) for the general VP-SBAR-S pattern we capture more relative clauses with this pattern: 
+**(q5)** for the general VP-SBAR-S pattern we capture more relative clauses with this pattern: 
 
 	#vp & #sbar1 & #s1 & #sbar2 & #s2 
 	& #vp: [cat="VP"] 
@@ -87,10 +87,10 @@ Under the direction of its new chairman, Francisco Luzon, Spain's seventh larges
 
 ### Export matches
 
-	Export Matches to File: corpus name + _ + query_name, e.g. wsj_full
+Export Matches to File: corpus name + _ + query_name, e.g. wsj_full
 
-	q1 - full
-	q2 - general
-	q3 - wh
-	q4 - that
-	q5 - relative
+* q1 - full
+* q2 - general
+* q3 - wh
+* q4 - that
+* q5 - relative
