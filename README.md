@@ -46,6 +46,7 @@ If you make use of the contents of this repository, please cite the following pa
 
 **(q2)** for the general VP-SBAR-S pattern without any constraints: 
 
+	#vp & #sbar & #s 
 	& #vp: [cat="VP"] 
 	& #sbar: [cat="SBAR"]
 	& #s: [cat="S"]
@@ -103,6 +104,47 @@ The FDA already requires drug manufactures to [include [warnings *ICH*]_NP [with
 
 Under the direction of its new chairman, Francisco Luzon, Spain's seventh largest bank is undergoing a tough restructuring [[that]_WHNP [analysts [say [[may be the first step toward the bank's privatization]_S]_SBAR2]_VP]_S1]_SBAR1
 
+**(q6)** for temporal "since" examples"
+
+	#root & #sbar & #s 
+	& #root: [cat=/.*/] 
+	& #sbar: [cat="SBAR"]
+	& #s: [cat="S"]
+	& #root >TMP #sbar
+	& #sbar > #s
+	& #sbar > [word="since"];
+
+**(q7)** for purpose/reason "since" examples"
+
+	#root & #sbar & #s 
+	& #root: [cat=/.*/] 
+	& #sbar: [cat="SBAR"]
+	& #s: [cat="S"]
+	& #root >PRP #sbar
+	& #sbar > #s
+	& #sbar > [word="since"];
+
+**(q8)** for temporal "as" examples"
+
+	#root & #sbar & #s 
+	& #root: [cat=/.*/] 
+	& #sbar: [cat="SBAR"]
+	& #s: [cat="S"]
+	& #root >TMP #sbar
+	& #sbar > #s
+	& #sbar > [word="as"];
+
+**(q9)** for purpose/reason "as" examples"
+
+	#root & #sbar & #s 
+	& #root: [cat=/.*/] 
+	& #sbar: [cat="SBAR"]
+	& #s: [cat="S"]
+	& #root >PRP #sbar
+	& #sbar > #s
+	& #sbar > [word="as"];
+
+
 ### Export matches
 
 Export Matches to File: corpus name + _ + query_name, e.g. wsj_full
@@ -112,3 +154,7 @@ Export Matches to File: corpus name + _ + query_name, e.g. wsj_full
 * q3 - wh
 * q4 - that
 * q5 - relative
+* q6 - since_tmp
+* q7 - since_prp
+* q8 - as_tmp
+* q9 - as_tmp
