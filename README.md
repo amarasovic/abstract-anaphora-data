@@ -157,6 +157,7 @@ Under the direction of its new chairman, Francisco Luzon, Spain's seventh larges
 
 
 **(q11)** for all "as" examples:
+
 	#vp & #sbar & #s 
 	& #vp: [cat="VP"] 
 	& #sbar: [cat="SBAR"]
@@ -166,6 +167,7 @@ Under the direction of its new chairman, Francisco Luzon, Spain's seventh larges
 	& #sbar > [word="as"];
 
 **(q12)** for adv "if" examples for which the SBAR node has only 2 children:
+
 	#vp & #sbar & #s 
 	& #vp: [cat="VP"] 
 	& #sbar: [cat="SBAR"]
@@ -176,6 +178,7 @@ Under the direction of its new chairman, Francisco Luzon, Spain's seventh larges
 	& arity(#sbar, 2);
 
 **(q13)** for all "if" examples:
+
 	#vp & #sbar & #s 
 	& #vp: [cat="VP"] 
 	& #sbar: [cat="SBAR"]
