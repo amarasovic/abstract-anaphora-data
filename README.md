@@ -55,7 +55,7 @@ If you make use of the contents of this repository, please cite the following pa
 
 **(q3)** for the VP-SBAR-S pattern _with_ wh-adverb (WHADV), wh-noun (WHNP) or wh-propositional (WHPP) subordinate clause (SBAR):
 
-	#vp & #sbar & #s 
+	#vp & #sbar & #s & #wh 
 	& #vp: [cat="VP"] 
 	& #sbar: [cat="SBAR"]
 	& #s: [cat="S"]
@@ -73,14 +73,14 @@ If you make use of the contents of this repository, please cite the following pa
 
 **(q4)** for the VP-SBAR-S pattern WITH "that" as the head of the SBAR clause we require that the VP has exactly 2 children (to avoid relative clauses); others are captured with:
 	
-	#vp & #sbar & #s 
+	#vp & #sbar & #s  
 	& #vp: [cat="VP"] 
 	& #sbar: [cat="SBAR"]
 	& #s: [cat="S"]
 	& #vp > #sbar
 	& #sbar > #s
 	& #sbar > [word="that"]
-	& arity(#vp,3, 100);
+	& arity(#vp, 3, 100);
 
 **A filtered example**
 
@@ -136,21 +136,21 @@ Under the direction of its new chairman, Francisco Luzon, Spain's seventh larges
 
 **(q9)** for temporal "as" examples:
 
-	#root & #sbar & #s 
-	& #root: [cat=/.*/] 
+	#vp & #sbar & #s 
+	& #vp: [cat="VP"] 
 	& #sbar: [cat="SBAR"]
 	& #s: [cat="S"]
-	& #root >TMP #sbar
+	& #vp >TMP #sbar
 	& #sbar > #s
 	& #sbar > [word="as"];
 
 **(q10)** for purpose/reason "as" examples:
 
-	#root & #sbar & #s 
-	& #root: [cat=/.*/] 
+	#vp & #sbar & #s 
+	& #vp: [cat="VP"] 
 	& #sbar: [cat="SBAR"]
 	& #s: [cat="S"]
-	& #root >PRP #sbar
+	& #vp >PRP #sbar
 	& #sbar > #s
 	& #sbar > [word="as"];
 
