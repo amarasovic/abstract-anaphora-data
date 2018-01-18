@@ -209,5 +209,14 @@ Export Matches to File: tigersearch_matches/corpus_name + _ + query_name, e.g. t
 
 ### Make json #1
 
-``````
+```python make_artificicial_anaphora_data_fromtigerxml.py corpus_name```
+
+Produces a jason of the format: TBD
+
+
+### Post-processing step #1
+
+### Post-processing step #2
+
+### Vectorize input for a neural network 
 
