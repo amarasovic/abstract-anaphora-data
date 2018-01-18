@@ -186,7 +186,7 @@ Under the direction of its new chairman, Francisco Luzon, Spain's seventh larges
 
 ### Export matches
 
-Export Matches to File: corpus name + _ + query_name, e.g. wsj_full (without .xml). It is important for next steps that files are saved exactly in this format.
+Export Matches to File: tigersearch_matches/corpus_name + _ + query_name, e.g. tigersearch_matches/wsj_full (without .xml). It is important for next steps that files are saved exactly in this format.
 
 * q1 - full
 * q2 - general
@@ -202,7 +202,6 @@ Export Matches to File: corpus name + _ + query_name, e.g. wsj_full (without .xm
 * q12 - if_adv
 * q13 - if_vp
 
-$ \sum_{\forall i}{x_i^{2}} $
 
 ### Make json #1
 
