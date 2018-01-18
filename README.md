@@ -82,7 +82,7 @@ If you make use of the contents of this repository, please cite the following pa
 	& #sbar > [word="that"]
 	& arity(#vp, 3, 100);
 
-**A filtered example**
+**A filtered example:**
 
 The FDA already requires drug manufactures to [include [warnings *ICH*]_NP [with [insulin products]_NP]_PP [that [symptoms of hypoglycemia are less pronounced with human insulin than with animal-based products]_S]_SBAR. 
 
@@ -101,7 +101,7 @@ The FDA already requires drug manufactures to [include [warnings *ICH*]_NP [with
 	& #vp > #sbar2
 	& #sbar2 > #s2 
 
-**Filtered example:***
+**Filtered example:**
 
 Under the direction of its new chairman, Francisco Luzon, Spain's seventh largest bank is undergoing a tough restructuring [[that]_WHNP [analysts [say [[may be the first step toward the bank's privatization]_S]_SBAR2]_VP]_S1]_SBAR1
 
