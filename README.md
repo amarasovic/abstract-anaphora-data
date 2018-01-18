@@ -71,15 +71,16 @@ If you make use of the contents of this repository, please cite the following pa
 * WHADVP: Predictions for limited dollar losses are based largely on the pound's weak state after Mr. Lawson's resignation and the yen's inability to [strengthen substantially [when [there are dollar retreats]_S]_SBAR]_VP.
 * WHPP: He said, while dialogue is important, enough forums already [exist [in which [different intrests can express themselve]_S]_SBAR]_VP.
 
-**(q4)** for the VP-SBAR-S pattern WITH "that" as the head of the SBAR clause we require that the SBAR has exactly 2 children; others are captured with:
+**(q4)** for the VP-SBAR-S pattern WITH "that" as the head of the SBAR clause we require that the VP has exactly 2 children (to avoid relative clauses); others are captured with:
 	
 	#vp & #sbar & #s 
 	& #vp: [cat="VP"] 
 	& #sbar: [cat="SBAR"]
 	& #s: [cat="S"]
+	& #vp > #sbar
 	& #sbar > #s
 	& #sbar > [word="that"]
-	& arity(#vp,3,100);
+	& arity(#vp,3, 100);
 
 **A filtered example**
 
@@ -124,7 +125,16 @@ Under the direction of its new chairman, Francisco Luzon, Spain's seventh larges
 	& #sbar > #s
 	& #sbar > [word="since"];
 
-**(q8)** for temporal "as" examples:
+**(q8)** for all "since" examples for which the parrent of the SBAR node is a VP:
+	#vp & #sbar & #s 
+	& #vp: [cat="VP"] 
+	& #sbar: [cat="SBAR"]
+	& #s: [cat="S"]
+	& #vp > #sbar
+	& #sbar > #s
+	& #sbar > [word="since"];
+
+**(q9)** for temporal "as" examples:
 
 	#root & #sbar & #s 
 	& #root: [cat=/.*/] 
@@ -134,7 +144,7 @@ Under the direction of its new chairman, Francisco Luzon, Spain's seventh larges
 	& #sbar > #s
 	& #sbar > [word="as"];
 
-**(q9)** for purpose/reason "as" examples:
+**(q10)** for purpose/reason "as" examples:
 
 	#root & #sbar & #s 
 	& #root: [cat=/.*/] 
@@ -145,9 +155,38 @@ Under the direction of its new chairman, Francisco Luzon, Spain's seventh larges
 	& #sbar > [word="as"];
 
 
+**(q11)** for all "as" examples:
+	#vp & #sbar & #s 
+	& #vp: [cat="VP"] 
+	& #sbar: [cat="SBAR"]
+	& #s: [cat="S"]
+	& #vp > #sbar
+	& #sbar > #s
+	& #sbar > [word="as"];
+
+**(q12)** for adv "if" examples for which the SBAR node has only 2 children:
+	#vp & #sbar & #s 
+	& #vp: [cat="VP"] 
+	& #sbar: [cat="SBAR"]
+	& #s: [cat="S"]
+	& #vp >ADV #sbar
+	& #sbar > #s
+	& #sbar > [word="if"]
+	& arity(#sbar, 2);
+
+**(q13)** for all "if" examples:
+	#vp & #sbar & #s 
+	& #vp: [cat="VP"] 
+	& #sbar: [cat="SBAR"]
+	& #s: [cat="S"]
+	& #vp > #sbar
+	& #sbar > #s
+	& #sbar > [word="if"];
+
+
 ### Export matches
 
-Export Matches to File: corpus name + _ + query_name, e.g. wsj_full
+Export Matches to File: corpus name + _ + query_name, e.g. wsj_full (without .xml). It is important for next steps that files are saved exactly in this format.
 
 * q1 - full
 * q2 - general
@@ -156,5 +195,16 @@ Export Matches to File: corpus name + _ + query_name, e.g. wsj_full
 * q5 - relative
 * q6 - since_tmp
 * q7 - since_prp
-* q8 - as_tmp
+* q8 - since_vp
 * q9 - as_tmp
+* q10 - as_prp
+* q11 - as_vp
+* q12 - if_adv
+* q13 - if_vp
+
+$ \sum_{\forall i}{x_i^{2}} $
+
+### Make json #1
+
+``````
+
