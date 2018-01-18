@@ -99,7 +99,7 @@ The FDA already requires drug manufactures to [include [warnings *ICH*]_NP [with
 	& #sbar1 > #s1
 	& #s1 > #vp
 	& #vp > #sbar2
-	& #sbar2 > #s2 
+	& #sbar2 > #s2; 
 
 **Filtered example:**
 
