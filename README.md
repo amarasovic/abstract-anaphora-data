@@ -126,6 +126,7 @@ Under the direction of its new chairman, Francisco Luzon, Spain's seventh larges
 	& #sbar > [word="since"];
 
 **(q8)** for all "since" examples for which the parrent of the SBAR node is a VP:
+
 	#vp & #sbar & #s 
 	& #vp: [cat="VP"] 
 	& #sbar: [cat="SBAR"]
