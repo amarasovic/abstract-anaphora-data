@@ -211,6 +211,8 @@ Export Matches to File: tigersearch_matches/corpus_name + _ + query_name, e.g. t
 
 ```python make_artificicial_anaphora_data_fromtigerxml.py corpus_name```
 
+```python post_process.py corpus_name_out corpus_name_new```
+
 Produces a jason of the format: 
 
 ```
