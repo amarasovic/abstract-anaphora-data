@@ -211,7 +211,190 @@ Export Matches to File: tigersearch_matches/corpus_name + _ + query_name, e.g. t
 
 ```python make_artificicial_anaphora_data_fromtigerxml.py corpus_name```
 
-Produces a jason of the format: TBD
+Produces a jason of the format: 
+
+```
+{
+        "anaphor": "sring", # e.g. "because of that"
+        "anaphor_derived_from": "string", # "since-prp"
+        "anaphor_head": "string", # "that" 
+        "antecedent_nodes": [
+            "string", e.g. "S"
+            "string", e.g. "VP"
+        ], 
+        "antecedents": [
+            "string", 
+            "string"
+        ], 
+        "artificial_source": "string", # sentence without the S clause which serves as the antecedent 
+        "artificial_source_suggestion": "string", # artificial_source with the anaphor replacement for the S clause
+        "candidate_nodes": [ 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string" 
+        ], # list of syntactic tag labels for every negative candidate from the sentence which contains the antecedent
+        "candidate_nodes_0": [
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string" 
+        ], # list of syntactic tag labels for every negative candidate from the anaphoric sentence
+        "candidate_nodes_1": [
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string" 
+        ],  # list of syntactic tag labels for every negative candidate from the sentence before the anaphoric sentence
+        "candidate_nodes_2": [
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string" 
+        ], # list of syntactic tag labels for every negative candidate from the sentence which is two positions before the anaphoric sentence
+        "candidate_nodes_3": [
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string"  
+        ], # list of syntactic tag labels for every negative candidate from the sentence which is 3 positions before the anaphoric sentence
+        "candidate_nodes_4": [
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string"   
+        ], # list of syntactic tag labels for every negative candidate from the sentence which is 4 positions before the anaphoric sentence
+        "candidates": [
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string" 
+        ], # list of string of negative candidates from the sentence which contains the antecedents
+        "candidates_0": [
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string" 
+        ], # list of string of negative candidates from the anaphoric sentence
+        "candidate_1": [
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string" 
+        ],  # list of string of negative candidates from the sentence before the anaphoric sentence
+        "candidate_2": [
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string" 
+        ], # list of string of negative candidates from the sentence two positions before the anaphoric sentence
+        "candidate_3": [
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string" 
+        ], # list of string of negative candidates from the sentence 3 positions before the anaphoric sentence
+        "candidate_4": [
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string", 
+            "string" 
+        ], # list of string of negative candidates from the sentence 4 positions before the anaphoric sentence
+        "original_sentence": "string", # the sentence on which the syntactic pattern for extraction was applied
+        "path_to_doc": "string", 
+        "prev_context": [
+        	"string",
+            "string",
+            "string",
+            "string"
+        ] # strings of 4 preceding sentences of the anaphoric sentence
+    }
+
+```
 
 
 ### Post-processing step #1
