@@ -215,17 +215,18 @@ Produces a jason of the format:
 
 ```
 {
-        "anaphor": "sring", # e.g. "because of that"
+        "anaphor": "string", # e.g. "because of that"
         "anaphor_derived_from": "string", # "since-prp"
         "anaphor_head": "string", # "that" 
         "antecedent_nodes": [
-            "string", e.g. "S"
-            "string", e.g. "VP"
+            "string", # e.g. "S"
+            "string", # e.g. "VP"
         ], 
         "antecedents": [
             "string", 
             "string"
-        ], 
+        ], # every other constituent that differs from the extracted antecedent in one word and any number of punctuation is consider to be the antecedent as well
+           # constituents that contain information about the head of the SBAR clause (e.g. that) or the verb that embeds the SBAR clause (e.g. said) are filtered from both positive and negative candidates
         "artificial_source": "string", # sentence without the S clause which serves as the antecedent 
         "artificial_source_suggestion": "string", # artificial_source with the anaphor replacement for the S clause
         "candidate_nodes": [ 
