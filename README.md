@@ -213,7 +213,7 @@ Export Matches to File: tigersearch_matches/corpus_name + _ + query_name, e.g. t
 
 ```python post_process.py corpus_name_out corpus_name_new```
 
-Produces a jason of the format: 
+Produces a json of the format: 
 
 ```
 {
