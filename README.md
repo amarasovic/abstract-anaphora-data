@@ -605,7 +605,7 @@ def vectorize_json(vocabulary, pos_vocabulary, data):
 All together:
 
 ```
-make_model_input(['artificial_wsj'], ['small'])
+    make_model_input(['artificial_wsj'], ['small'])
 
     json_file = 'aar_jsons/artificial_wsj_small.json'
     with open(json_file) as data_file:
