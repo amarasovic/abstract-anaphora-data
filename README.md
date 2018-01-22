@@ -484,7 +484,10 @@ def make_model_input(datasets, candidates_list_size):
                 positive_candidates_all.append(positive_candidates_tokenize)
                 positive_candidates_tag_all.append(positive_candidate_tags)
 
-                sentences.append(anaphoric_sentence)
+                original_sent = item['original_sentence']
+                filter_tokens = ["0", "*", "*T*", "*U*", "*?*", "*PRO*", "*RNR*", "*ICH*", "*EXP*", "*NOT*"]
+                original_sent_clean = [w for w in word_tokenize(original_sent) if w not in filter_tokens]
+                sentences.apped(original_sent_clean)
                 if candidates_list_size != 'small':
                     distance = int(candidates_list_size.split('_'))
                     prev_context = item['prev_context']
