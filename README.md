@@ -207,7 +207,7 @@ Export Matches to File: tigersearch_matches/corpus_name + _ + query_name, e.g. t
 * q13 - if_vp
 
 
-### Make json #1
+### Make json 
 
 ```python make_artificicial_anaphora_data_fromtigerxml.py corpus_name```
 
@@ -399,7 +399,7 @@ Produces a json of the format:
 
 ```
 
-### Prepare json for the LSTM-Siamese mention-ranking model
+### Modify json for the LSTM-Siamese mention-ranking model
 
 ```
 def make_model_input(datasets, candidates_list_size):
