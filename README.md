@@ -422,14 +422,18 @@ def make_model_input(datasets, candidates_list_size):
 
             sentences = [] # all text sequences for constructing vocabulary
             sent_anaph = [] # anaphoric sentence
+            orig_sent_anaph = []
             anaph = [] # anaphor / shell noun
             ctx_all = [] # context of the anaphor/shell noun
             positive_candidates_all = []
             negative_candidates_all = []
             positive_candidates_tag_all = []
             negative_candidates_tag_all = []
+            sbarhead_all = []
 
             for item in ijson.items(open(filename, 'r'), "item"):
+                if item['anaphor_head'] == 'none':
+                    continue
                 anaphoric_sentence = word_tokenize(item['artificial_source_suggestion'].lower().replace("-x-", ""))
 
                 # ignore anaphoric sentences with length (in tokens) < 10
@@ -439,7 +443,8 @@ def make_model_input(datasets, candidates_list_size):
                 positive_candidates = [candidate.lower() for candidate in item['antecedents']]
                 positive_candidate_tags = item['antecedent_nodes']
 
-                assert len(list(set(positive_candidates))) == len(list(positive_candidates))
+                # assert len(list(set(positive_candidates))) == len(list(positive_candidates))
+
                 if not positive_candidates:
                     continue
 
@@ -448,15 +453,16 @@ def make_model_input(datasets, candidates_list_size):
 
                 if size == "small":
                     negative_candidates = [candidate.lower() for candidate in item['candidates']]
-                    negative_candidates_tag = item['candidate_nodes']
+                    negative_candidates_tag = item['candidates_nodes']
                 else:
                     negative_candidates = []
                     negative_candidates_tag = []
                     for i in range(int(size.split("_")[1])+1):
                         negative_candidates.extend([candidate.lower() for candidate in item['candidates_'+str(i)]])
-                        negative_candidates_tag.extend(item['candidate_nodes_'+str(i)])
+                        negative_candidates_tag.extend(item['candidates_nodes_'+str(i)])
 
-                assert len(list(set(negative_candidates))) == len(list(negative_candidates))
+                #assert len(list(set(negative_candidates))) == len(list(negative_candidates))
+
                 if not negative_candidates:
                     continue
 
@@ -479,6 +485,7 @@ def make_model_input(datasets, candidates_list_size):
                 ctx_all.append(ctx)
                 anaph.append(word_tokenize(item['anaphor_head']))
                 sent_anaph.append(anaphoric_sentence)
+                sbarhead_all.append(item['anaphor_derived_from'])
                 negative_candidates_all.append(negative_candidates_tokenize)
                 negative_candidates_tag_all.append(negative_candidates_tag)
                 positive_candidates_all.append(positive_candidates_tokenize)
@@ -486,26 +493,42 @@ def make_model_input(datasets, candidates_list_size):
 
                 original_sent = item['original_sentence']
                 filter_tokens = ["0", "*", "*T*", "*U*", "*?*", "*PRO*", "*RNR*", "*ICH*", "*EXP*", "*NOT*"]
-                original_sent_clean = [w for w in word_tokenize(original_sent) if w not in filter_tokens]
-                sentences.apped(original_sent_clean)
-                if candidates_list_size != 'small':
-                    distance = int(candidates_list_size.split('_'))
+                original_sent_clean = [w.lower() for w in word_tokenize(original_sent) if w not in filter_tokens]
+                original_sent_clean_str = ' '.join(original_sent_clean)
+                sentences.append(original_sent_clean)
+                if size.split("_")[0] != 'small':
+                    distance = int(size.split("_")[1])
                     prev_context = item['prev_context']
                     for dist, sent in enumerate(prev_context):
                         if dist <= distance:
                             sentences.append(word_tokenize(sent.lower()))
+                orig_sent_anaph.append(original_sent_clean_str)
 
             data = zip(anaph, sent_anaph,
                        positive_candidates_all, negative_candidates_all,
                        positive_candidates_tag_all, negative_candidates_tag_all,
-                       ctx_all)
+                       ctx_all, sbarhead_all, orig_sent_anaph)
 
             assert data
             dict_train = {'dataset_sentences': sentences,
                           'data': data}
 
-            with open("aar_jsons/" + dataset + "_" + size + '.json', 'w') as fp:
+            with open("data/" + dataset + "_" + size + '.json', 'w') as fp:
                 json.dump(dict_train, fp)
+
+            for atype in ['NONE', 'that', 'this', '0', 'because', 'while', 'if-adv', 'since-tmp', 'since-prp',
+                          'as-tmp', 'as-prp', 'whether', 'after', 'until']:
+                print atype
+                eval_sample_file = open('eval_data/eval_' + atype + '.txt', 'w')
+                for item in data:
+                    if item[7] == atype:
+                        pos_candidates = ''.join(['(' + str(k) + ') ' + ' '.join(cand) + ', ' for k, cand in enumerate(item[2])])
+                        eval_sample_file.write('\t'.join([item[7],
+                                                          item[0][0],
+                                                          item[8],
+                                                          ' '.join(item[1]),
+                                                          pos_candidates]) + '\n')
+                eval_sample_file.close()
 ```
 
 
@@ -586,9 +609,10 @@ def vectorize_json(vocabulary, pos_vocabulary, data):
     global PAD
     anaph_str, sent_anaph_str, \
     pos_cands_str, neg_cands_str, \
-    pos_cand_tags_str, neg_cand_tags_str, ctx_str = zip(*data)
+    pos_cand_tags_str, neg_cand_tags_str,\
+    ctx_str, _, _ = zip(*data)
 
-    anaph = [vocabulary[a] if a in vocabulary else vocabulary[UNK] for a in anaph_str]
+    anaph = [vocabulary[a] if a in vocabulary else vocabulary[UNK] for a in anaph_str[0]]
     sent_anaph = [[vocabulary[w] if w in vocabulary else vocabulary[UNK] for w in s] for s in sent_anaph_str]
     ctx = [[vocabulary[w] if w in vocabulary else vocabulary[UNK] for w in c] for c in ctx_str]
 
@@ -608,14 +632,16 @@ def vectorize_json(vocabulary, pos_vocabulary, data):
 All together:
 
 ```
-    make_model_input(['artificial_wsj'], ['small'])
+    make_model_input(['wsj'], ['small'])
 
-    json_file = 'aar_jsons/artificial_wsj_small.json'
+    json_file = 'data/wsj_small.json'
     with open(json_file) as data_file:
         artificial = json.load(data_file)
     sentences = artificial['dataset_sentences']
 
-    emb, vocab, oov_prec = get_emb_vocab(sentences, 'w2v', 100, 3)
+    emb, vocab, oov_prec = get_emb_vocab(sentences, 'glove', 100, 1)
+
+    print vocab
 
     pos_tags_filename = "data/penn_treebank_tags.txt"
     pos_tags_lines = codecs.open(pos_tags_filename, "r", encoding="utf-8").readlines()
