@@ -211,7 +211,7 @@ Export Matches to File: tigersearch_matches/corpus_name + _ + query_name, e.g. t
 
 ### Replacements 
 
-<p align="left"><img src="figs/replacements.png" width="200" align="middle" alt="replacements"></p>
+<p align="left"><img src="figs/replacements.png" width="400" align="middle" alt="replacements"></p>
 
 
 ### Make json 
