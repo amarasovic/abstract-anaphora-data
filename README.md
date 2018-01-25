@@ -209,6 +209,11 @@ Export Matches to File: tigersearch_matches/corpus_name + _ + query_name, e.g. t
 * q13 - if_vp
 
 
+### Replacements 
+
+<p align="left"><img src="figs/replacements.png" width="200" align="middle" alt="replacements"></p>
+
+
 ### Make json 
 
 ```python make_artificicial_anaphora_data_fromtigerxml.py corpus_name```
