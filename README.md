@@ -32,6 +32,8 @@ If you make use of the contents of this repository, please cite the following pa
 4. import parsed corpus and choose "General Penn treebank format filter"
 5. click Start
 
+*NOTE:* before parsing a corpus we excluded documents which occur in our test sets. 
+
 ### Find matches for a syntactic pattern
 1. run: ```./runTSearch.sh```
 2. click on the corpus in the left sidebar
@@ -64,14 +66,14 @@ If you make use of the contents of this repository, please cite the following pa
 	& #sbar > #s
 	& #sbar > #wh;
 
-**Filtered examples**: 
+**Examples which will be filtered later**: 
 
 * WHNP: That selling of futures contract by elevators [is [what [helps keep downward pressure on crop prices during the harves]_S]_SBAR]_VP.
 * WHADJP: But some analysts [wonder [how [strong the recovery will be]_S]_SBAR]_VP.
 * WHADVP: Predictions for limited dollar losses are based largely on the pound's weak state after Mr. Lawson's resignation and the yen's inability to [strengthen substantially [when [there are dollar retreats]_S]_SBAR]_VP.
 * WHPP: He said, while dialogue is important, enough forums already [exist [in which [different intrests can express themselve]_S]_SBAR]_VP.
 
-**(q4)** for the VP-SBAR-S pattern WITH "that" as the head of the SBAR clause we require that the VP has exactly 2 children (to avoid relative clauses); others are captured with:
+**(q4)** for the VP-SBAR-S pattern _with_ "that" as the head of the SBAR clause we require that the VP has exactly 2 children (to avoid relative clauses); others are captured with:
 	
 	#vp & #sbar & #s  
 	& #vp: [cat="VP"] 
@@ -101,11 +103,11 @@ The FDA already requires drug manufactures to [include [warnings *ICH*]_NP [with
 	& #vp > #sbar2
 	& #sbar2 > #s2; 
 
-**Filtered example:**
+**A filtered example:**
 
 Under the direction of its new chairman, Francisco Luzon, Spain's seventh largest bank is undergoing a tough restructuring [[that]_WHNP [analysts [say [[may be the first step toward the bank's privatization]_S]_SBAR2]_VP]_S1]_SBAR1
 
-**(q6)** for temporal "since" examples:
+**(q6)** for the VP-SBAR-S pattern _with_ "since" as the head of the SBAR-TMP clause:
 
 	#root & #sbar & #s 
 	& #root: [cat=/.*/] 
@@ -115,7 +117,7 @@ Under the direction of its new chairman, Francisco Luzon, Spain's seventh larges
 	& #sbar > #s
 	& #sbar > [word="since"];
 
-**(q7)** for purpose/reason "since" examples:
+**(q7)** for the VP-SBAR-S pattern _with_ "since" as the head of the SBAR-PRP clause:
 
 	#root & #sbar & #s 
 	& #root: [cat=/.*/] 
@@ -125,7 +127,7 @@ Under the direction of its new chairman, Francisco Luzon, Spain's seventh larges
 	& #sbar > #s
 	& #sbar > [word="since"];
 
-**(q8)** for all "since" examples for which the parrent of the SBAR node is a VP:
+**(q8)** for the VP-SBAR-S pattern _with_ "since" as the head of the SBAR clause:
 
 	#vp & #sbar & #s 
 	& #vp: [cat="VP"] 
@@ -135,7 +137,7 @@ Under the direction of its new chairman, Francisco Luzon, Spain's seventh larges
 	& #sbar > #s
 	& #sbar > [word="since"];
 
-**(q9)** for temporal "as" examples:
+**(q9)** for the VP-SBAR-S pattern _with_ "as" as the head of the SBAR-TMP clause:
 
 	#vp & #sbar & #s 
 	& #vp: [cat="VP"] 
@@ -145,7 +147,7 @@ Under the direction of its new chairman, Francisco Luzon, Spain's seventh larges
 	& #sbar > #s
 	& #sbar > [word="as"];
 
-**(q10)** for purpose/reason "as" examples:
+**(q10)** for the VP-SBAR-S pattern _with_ "as" as the head of the SBAR-PRP clause:
 
 	#vp & #sbar & #s 
 	& #vp: [cat="VP"] 
@@ -156,7 +158,7 @@ Under the direction of its new chairman, Francisco Luzon, Spain's seventh larges
 	& #sbar > [word="as"];
 
 
-**(q11)** for all "as" examples:
+**(q11)** for the VP-SBAR-S pattern _with_ "as" as the head of the SBAR clause:
 
 	#vp & #sbar & #s 
 	& #vp: [cat="VP"] 
@@ -166,7 +168,7 @@ Under the direction of its new chairman, Francisco Luzon, Spain's seventh larges
 	& #sbar > #s
 	& #sbar > [word="as"];
 
-**(q12)** for adv "if" examples for which the SBAR node has only 2 children:
+**(q12)** for the VP-SBAR-S pattern _with_  "if" as the head of the SBAR-ADV clause with only 2 children: 
 
 	#vp & #sbar & #s 
 	& #vp: [cat="VP"] 
@@ -177,7 +179,7 @@ Under the direction of its new chairman, Francisco Luzon, Spain's seventh larges
 	& #sbar > [word="if"]
 	& arity(#sbar, 2);
 
-**(q13)** for all "if" examples:
+**(q13)** for the VP-SBAR-S pattern _with_ "if" as the head of the SBAR clause:
 
 	#vp & #sbar & #s 
 	& #vp: [cat="VP"] 
@@ -211,15 +213,15 @@ Export Matches to File: tigersearch_matches/corpus_name + _ + query_name, e.g. t
 
 ```python make_artificicial_anaphora_data_fromtigerxml.py corpus_name```
 
-```python post_process.py corpus_name_out corpus_name_new```
+```python post_process.py corpus_name_out```
 
 Produces a json of the format: 
 
 ```
 {
-        "anaphor": "string", # e.g. "because of that"
         "anaphor_derived_from": "string", # "since-prp"
         "anaphor_head": "string", # "that" 
+        "anaphor_phrase": "string", # "because of that"
         "antecedent_nodes": [
             "string", # e.g. "S"
             "string", # e.g. "VP"
@@ -492,7 +494,7 @@ def make_model_input(datasets, candidates_list_size):
                 positive_candidates_tag_all.append(positive_candidate_tags)
 
                 original_sent = item['original_sentence']
-                filter_tokens = ["0", "*", "*T*", "*U*", "*?*", "*PRO*", "*RNR*", "*ICH*", "*EXP*", "*NOT*"]
+                filter_tokens = ["0", "*", "*T*", "*U*", "*?*", "*PRO*", "*RNR*", "*ICH*", "*EXP*", "*NOT*", "-LRB-", "-RRB-"]
                 original_sent_clean = [w.lower() for w in word_tokenize(original_sent) if w not in filter_tokens]
                 original_sent_clean_str = ' '.join(original_sent_clean)
                 sentences.append(original_sent_clean)
@@ -516,9 +518,7 @@ def make_model_input(datasets, candidates_list_size):
             with open("data/" + dataset + "_" + size + '.json', 'w') as fp:
                 json.dump(dict_train, fp)
 
-            for atype in ['NONE', 'that', 'this', '0', 'because', 'while', 'if-adv', 'since-tmp', 'since-prp',
-                          'as-tmp', 'as-prp', 'whether', 'after', 'until']:
-                print atype
+            for atype in ['NONE', 'that', 'this', '0', 'because', 'while', 'if-adv', 'since-tmp', 'since-prp', 'as-tmp', 'as-prp', 'whether', 'after', 'until']:
                 eval_sample_file = open('eval_data/eval_' + atype + '.txt', 'w')
                 for item in data:
                     if item[7] == atype:
