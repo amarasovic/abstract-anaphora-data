@@ -220,7 +220,7 @@ Export Matches to File: tigersearch_matches/corpus_name + _ + query_name, e.g. t
 
 ```python post_process.py corpus_name_out```
 
-Produces a json of the format: 
+Produces a json of the format and saves it as ```data/corpus.wsj```:
 
 ```
 {
