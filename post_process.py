@@ -20,6 +20,9 @@ def filter_by_antecedent_and_anaphor(dat):
         if sample['anaphor_head'] == 'direct':
             continue
 
+        if sample['anaphor_head'] == 'none':
+            continue
+
         if sample['anaphor_derived_from'] == 'whether' and 'or' in word_tokenize(sample['artificial_antecedent']):
             continue
 
@@ -228,6 +231,6 @@ if __name__ == '__main__':
     dat4 = remove_duplicate_candidates(dat3)
     dat5 = move2antecedent(dat4)
 
-    with open(sys.argv[1] + '.json', 'w') as f:
+    with open('data/' + sys.argv[1] + '.json', 'w') as f:
         f.write(json.dumps(dat5, indent=4, sort_keys=True))
 

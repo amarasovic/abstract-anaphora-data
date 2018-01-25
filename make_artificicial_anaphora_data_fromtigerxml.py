@@ -345,6 +345,8 @@ def make_artificial_data(minlen_antecedent=2, candidate_window=3):
         words = {}
         sbarids = []
         sids = []
+        vpids = []
+        rootids = []
         secedges = {}
 
         for terminal in sentence.iter("t"):
@@ -365,8 +367,13 @@ def make_artificial_data(minlen_antecedent=2, candidate_window=3):
                 sbarids.append(sbarid)
             if match.attrib["name"] == "#s":
                 sids.append(match.attrib["idref"])
-            #if match.attrib["name"] == "#vp":
-            #    vpids.append(match.attrib["idref"])
+            if match.attrib["name"] == "#vp":
+                vpids.append(match.attrib["idref"])
+            if match.attrib["name"] == "#root":
+                rootids.append(match.attrib["idref"])
+
+        if len(sbarids) != len(vpids):
+            vpids = rootids
 
         for matchidx, sbarid in enumerate(sbarids):
             for nt in sentence.iter("nt"):
@@ -384,6 +391,13 @@ def make_artificial_data(minlen_antecedent=2, candidate_window=3):
                         subtree = nt[0].attrib["idref"]
                         # sid = subtree
                 # e.g. head = ['s3433_10']
+            for nt in sentence.iter("nt"):
+                if nt.attrib["id"] == vpids[matchidx]:
+                    vpid = nt[0].attrib["idref"]
+                    if vpid in words:
+                        vp_word = words[vpid]
+                    else:
+                        vp_word = 'unk'
 
             cutoff = get_terminalids([subtree], sentence)
             terminal_ids = sorted(words.keys(), key=lambda z: int(z.split("_")[1]))
@@ -407,7 +421,7 @@ def make_artificial_data(minlen_antecedent=2, candidate_window=3):
                 sdic_temp = make_sample(words, cutoff, head, context_additional_att, sbar_additional, senid)
                 for x, y in sdic_temp.items():
                     sdic[x] = y if isinstance(y, basestring) else ' '.join(y)
-
+                sdic['vp'] = vp_word
                 sdic["prev_context"] = [" ".join(c) for c in pc]
                 sdic["later_context"] = [" ".join(c) for c in lc]
                 sdic["original_sentence"] = " ".join([words[k] for k in terminal_ids])
