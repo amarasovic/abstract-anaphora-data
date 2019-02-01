@@ -1,0 +1,35 @@
+Instructions on running the ARRAU constructor from the command-line
+===================================================================
+
+Assumes:
+1) Stanford CoreNLP is available 
+2) You are in directory X/ that looks like this:
+
+X/
+	arrau_csn/
+
+
+Steps:
+1) Download json-simple-1.1.1 (https://code.google.com/archive/p/json-simple/downloads#!) and protobuf bundle (http://mvnrepository.com/artifact/com.google.protobuf/protobuf-java/3.5.1) into X/:
+
+X/
+	json-simple-1.1.1.jar
+	arrau_csn/
+	protobuf-java-3.5.1.jar
+
+
+2) Generate class files for the ArrauPAConstructor
+2a) In directory X/, execute:
+javac -cp "json-simple-1.1.1.jar:/path_to_stanford_corenlp/stanford-corenlp-X.Y.0.jar:/path_to_stanford_corenlp/stanford-corenlp-full-20XX-YY-ZZ/stanford-corenlp-X.Y.Z-models.jar" arrau_csn/arrau/rst/ArrauPAConstructor.java
+2b) Ignore notes regarding unchecked or unsafe operations
+
+
+3) Run the constructor
+3a) In directory X/, execute:
+java -cp "protobuf-java-3.5.1.jar:json-simple-1.1.1.jar:/path_to_stanford_corenlp/stanford-corenlp-full-20XX-YY-ZZ/stanford-corenlp-X.Y.0.jar:/path_to_stanford_corenlp/stanford-corenlp-full-20XX-YY-ZZ/stanford-corenlp-X.Y.Z-models.jar:." arrau_csn.arrau.rst.ArrauPAConstructor /path_to_the_parent_folder/ARRAU/data/RST_DTreeBank/ train /path_to_the_parent_folder/ARRAU_out
+
+
+NOTES:
+------
+1) Works with at least Stanford CoreNLP 3.7.0 as well
+2) data_part can be "train", "dev", or "test"
