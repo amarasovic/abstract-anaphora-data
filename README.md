@@ -1,6 +1,15 @@
 # abstract-anaphora-data
 Scripts for processing data for resolution of abstract anaphora
 
+## Prepare gold data
+
+Use ```Gold Data/process_aar_data.py``` to prepare the ASN corpus (Kolhatkar et al, 2013) and the CoNLL-12 shared task data (Jauhar et al, 2015). 
+
+Read ```arrau_csn/instructions_arrau_construction.txt``` for processing of the ARRAU corpus (Poesio et al, 2018).
+
+
+
+
 ## Generate training data
 
 Follow instructions how to generate training data as in:
